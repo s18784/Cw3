@@ -14,9 +14,7 @@ namespace Cw3.DAL
         {
             _students = new List<Student>
             {
-                new Student(){IdStudent = 1, FirstName = "Mateusz", LastName = "Kadłubowski"},
-                new Student(){IdStudent = 2, FirstName = "Ryszard", LastName = "Kot"},
-                new Student(){IdStudent = 3, FirstName = "Tomasz", LastName = "Lis"}
+              
             };
         }
         public IEnumerable<Student> GetStudents()
