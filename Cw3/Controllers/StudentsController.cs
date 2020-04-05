@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Cw3.Models;
 using Cw3.DAL;
-
+using System.Data.SqlClient;
 namespace Cw3.Controllers
 {
     [Route("api/students")]
@@ -23,6 +23,22 @@ namespace Cw3.Controllers
         [HttpGet]
         public IActionResult GetStudent(string orderBy)
         {
+           using (var con = new SqlConnection("Data Source=db-mssql;Initial Catalog=s18784;Integrated Security=True"))
+           using (var com = new SqlCommand())
+           {
+                com.Connection = con;
+                com.CommandText = "select * from Student";
+
+                con.Open();
+                var dr = com.ExecuteReader();
+                while (dr.Read())    
+                {
+                    var st = new Student();
+                    st.FirstName = dr["FirstName"].ToString();
+                    Console.WriteLine(st.FirstName);
+                }
+           }
+            
             return Ok(_dbService.GetStudents());
         }
 
